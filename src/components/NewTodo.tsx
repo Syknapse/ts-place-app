@@ -1,11 +1,15 @@
 import React, { useRef } from 'react'
 
-const NewTodo: React.FC = () => {
+type NewTodoProps = {
+  onAddTodo: (text: string) => void
+}
+
+const NewTodo: React.FC<NewTodoProps> = ({ onAddTodo }) => {
   const ref = useRef<HTMLInputElement>(null)
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault()
     const value = ref.current!.value
-    console.log(value)
+    onAddTodo(value)
   }
   return (
     <form onSubmit={handleSubmit}>
